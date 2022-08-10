@@ -15,10 +15,15 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in('タイトル', with: 'test title')
     fill_in('内容', with: 'test content')
     click_on('登録する')
-    # puts Report.find(1)
+    assert Report.find(1)
   end
 
-  test 'delete report' do
-
+  test 'update report' do
+    create(:report, user_id: @user.id)
+    visit edit_report_path(1)
+    fill_in('タイトル', with: 'changed title')
+    click_on('更新する')
+    assert_text 'changed title'
+    # find('p > strong:first-child')
   end
 end
