@@ -26,4 +26,15 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text 'changed title'
     # find('p > strong:first-child')
   end
+
+  test 'delete report' do
+    create(:report, user_id: @user.id)
+    report_count = Report.all.count
+    visit reports_path
+    accept_confirm do
+      click_on '削除'
+    end
+    visit reports_path
+    assert_equal report_count - 1, Report.all.count
+  end
 end
