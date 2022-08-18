@@ -17,7 +17,7 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in('タイトル', with: 'test title')
     fill_in('内容', with: 'test content')
     click_on('登録する')
-    assert_equal true, page.has_text?('test title')
+    assert page.has_text?('test title')
   end
 
   test 'update report' do
@@ -25,7 +25,7 @@ class ReportsTest < ApplicationSystemTestCase
     visit edit_report_path(1)
     fill_in('タイトル', with: 'changed title')
     click_on('更新する')
-    assert_equal true, page.has_text?('changed title')
+    assert page.has_text?('changed title')
   end
 
   test 'delete report' do
@@ -35,6 +35,6 @@ class ReportsTest < ApplicationSystemTestCase
       click_on '削除'
     end
     visit reports_path
-    assert_equal true, page.has_no_text?('test title')
+    assert page.has_no_text?('test title')
   end
 end
